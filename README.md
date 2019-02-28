@@ -1,8 +1,8 @@
-# FoAaS
-Fuck Off As A Service - Slack outgoing webhook interface to FOaaS (http://www.foaas.com/)
+# FOAAS
+Fuck Off As A Service - Slack outgoing webhook interface to FOaaS (https://foaas.com/)
 
 # Set Up:
-FoAaS can be used as an outgoing webhook or a slash command.
+FOAAS can be used as an outgoing webhook or a slash command.
 
 ## Slash command:
 * Create a Slash Command with the URL `https://foaaslack.herokuapp.com/fuckoff_slashcommand`

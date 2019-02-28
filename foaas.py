@@ -55,8 +55,8 @@ def gen_fuckoff():
     if trigger_word:
         name = text.replace(trigger_word, "", 1)
 
-    # grab available fuckoff operateions
-    ops_r = requests.get('http://foaas.com/operations')
+    # grab available fuckoff operations
+    ops_r = requests.get('https://foaas.com/operations')
     ops = json.loads(ops_r.text)
 
     # assemble list of valid ops
@@ -87,7 +87,7 @@ def gen_fuckoff():
         url = url.replace(':name', name)
 
     # get fuckoff
-    fo_r = requests.get('http://foaas.com%s' % url, headers={ 'Accept': 'application/json' })
+    fo_r = requests.get('https://foaas.com%s' % url, headers={ 'Accept': 'application/json' })
     fo = json.loads(fo_r.text)
     return fo
 
