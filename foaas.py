@@ -35,6 +35,14 @@ def webhook():
 
 
 def gen_fuckoff():
+    # debug mode
+    debug = request.values.get('debug')
+    if debug:
+        app.config['DEBUG'] = True
+        verbose = request.values.get('verbose')
+        if verbose:
+            app.logger.debug(request.values)
+
     # trigger warning: trigger word
     trigger_word = request.values.get('trigger_word')
 
