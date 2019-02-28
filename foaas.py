@@ -52,7 +52,7 @@ def gen_fuckoff():
 
     # strip trigger word
     name = text
-    if trigger_word:
+    if trigger_word and text:
         name = text.replace(trigger_word, "", 1)
 
     # grab available fuckoff operations
