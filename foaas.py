@@ -8,6 +8,30 @@ import random
 app = Flask(__name__)
 
 
+debug = False
+verbose = False
+
+
+def set_debug_mode():
+    global debug
+    global verbose
+    if request.values.get('debug'):
+        debug = True
+        app.config['DEBUG'] = True
+    if request.values.get('verbose'):
+        verbose = True
+
+
+def debugger(var):
+    global debug
+    if debug:
+        app.logger.debug(var)
+
+def print_request():
+    global verbose
+    if verbose:
+        debugger(request.values)
+
 @app.route('/fuckoff_slashcommand', methods=['GET', 'POST'])
 def slashcommand():
     fo = gen_fuckoff()
@@ -35,13 +59,8 @@ def webhook():
 
 
 def gen_fuckoff():
-    # debug mode
-    debug = request.values.get('debug')
-    if debug:
-        app.config['DEBUG'] = True
-        verbose = request.values.get('verbose')
-        if verbose:
-            app.logger.debug(request.values)
+    set_debug_mode()
+    print_request()
 
     # trigger warning: trigger word
     trigger_word = request.values.get('trigger_word')
