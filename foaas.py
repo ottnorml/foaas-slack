@@ -78,21 +78,17 @@ def gen_fuckoff():
     ops_r = requests.get('https://foaas.com/operations')
     ops = json.loads(ops_r.text)
 
-    # assemble list of valid ops
-    if not name:
-        # if we don't have a target name then we need to skip items that have a name param
-        ops = [op for op in ops if len([field for field in op['fields'] if field['field'] == 'name'])]
-
     # strip out operations that require extra fields
     basic_ops = []
     for op in ops:
         fields = op['fields']
         field_names = [field['field'] for field in fields]
-        # if not len(field_names) or set(field_names) == set(['from']) or set(field_names) == set(['name', 'from']):
 
         # only allow ones with from/to
-        if set(field_names) == set(['name', 'from']):
+        if not name and set(field_names) == set(['from']) or set(field_names) == set(['name', 'from']):
             basic_ops.append(op)
+
+    debugger(basic_ops)
 
     # pick random op
     op = random.choice(basic_ops)
